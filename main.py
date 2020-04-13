@@ -1,5 +1,7 @@
-a_string = "like this"
-a_number = 4
-a_float = 3.12
-a_boolean = False
-a_none = None
+days = ["Mon", "Tue", "Wed", "Thur", "Fri"]
+days.append("Sat", "Sun")
+days.reverse()
+
+print(days in "Mon")
+
+print(len(days))
