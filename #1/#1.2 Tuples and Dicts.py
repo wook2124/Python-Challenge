@@ -1,3 +1,6 @@
+# https://docs.python.org/3/library/
+
+
 # This is "list" - [] (JavaScript - "Array")
 # Mutable
 days = ["Mon", "Tue", "Wed", "Thur", "Fri"]
