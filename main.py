@@ -1,7 +1,5 @@
-age = "27"
-print(type(age))
-print(age)
+def say_hello():
+    print("hello")
+    print("bye")
 
-change_age = int(age)
-print(type(change_age))
-print(change_age)
+say_hello()
