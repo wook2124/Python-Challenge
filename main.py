@@ -1,7 +1,7 @@
-def r_plus(a, b):
+def plus(a, b):
   return(a + b)
   print("lalalalalalala")
 
-r_result = r_plus(10, 3)
+result = plus(10, 3)
 
-print(r_result)
+print(result)
