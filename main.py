@@ -1,5 +1,7 @@
-def say_hello(name="Anonymous"):
-    print("Hello", name)
+def r_plus(a, b):
+  return(a + b)
+  print("lalalalalalala")
 
-say_hello()
-say_hello("Young Wook")
+r_result = r_plus(10, 3)
+
+print(r_result)
