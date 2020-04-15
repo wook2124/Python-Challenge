@@ -19,7 +19,7 @@ def add_to_dict(a, *args):
    print(f"You need to send a dictionary, You sent: {type(a)}")
   elif type(a) is dict:
    print("You need to send a word and a definition.")
-  elif type(a) is dict and my_english_dict[work]:
+  elif type(a) is dict and my_english_dict["work"] == "The sour of life":
     print("kimchi has been added.")
   else:
     print("kimchi is already on the dictionary. Won't add.")
