@@ -12,6 +12,7 @@ r = requests.get(URL)
 r.status_code == requests.codes.ok
 URL.strip()
 URL.split()
+# try, except
 
 qestion = input("Do you want to start over? y/n")
 qestion
@@ -23,4 +24,3 @@ elif qestion == n:
   print("See you on the Next Request!")
 else:
   print("That's invalid answer!")
-
