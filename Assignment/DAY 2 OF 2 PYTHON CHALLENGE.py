@@ -10,6 +10,7 @@ print(days)
 days.remove("Mon")
 print(days)
 
+
 # 정답 #
 def is_on_list(a_list=[], word=""):
   return word in a_list
