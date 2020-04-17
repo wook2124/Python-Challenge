@@ -3,16 +3,28 @@ import requests
 from bs4 import BeautifulSoup
 
 os.system("clear")
-URL = requests.get("https://www.iban.com/currency-codes")
 
-soup = BeautifulSoup(URL.text, "html.parser")
+def extract_currency_codes():
+  URL = requests.get("https://www.iban.com/currency-codes")
 
-table = soup.find("table", {"class": "table table-bordered downloads tablesorter"})
+  soup = BeautifulSoup(URL.text, "html.parser")
 
-pages = table.find_all("tr")
-tds = []
+  table = soup.find("table", {"class": "table table-bordered downloads tablesorter"})
 
-for page in pages:
-  tds.append(page.find("td"))
+  links = table.find_all("tr")
+  tds = []
 
-print(tds[1:-1])
+  for link in links[1:-1]:
+    tds.append(link.find("td").string)
+  return tds
+
+
+print(extract_currency_codes())
+
+
+# ints = [8, 23, 45, 12, 78]
+# for i in ints:
+#     print(f"item #{} = {}".format(???, i))
+
+# for idx, val in enumerate(ints):
+#     print(idx, val)
