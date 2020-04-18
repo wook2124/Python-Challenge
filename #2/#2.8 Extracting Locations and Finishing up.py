@@ -23,6 +23,7 @@ def get_last_page():
 def extract_job(whatever):
     title = whatever.find("h2", {"class": "title"}).find("a")["title"]
 
+    # None 값을 if else를 활용해서 걸러줌
     company = whatever.find("span", {"class": "company"})
     if company is not None:
         company_anchor = company.find("a")
@@ -38,6 +39,7 @@ def extract_job(whatever):
 
     job_id = whatever["data-jk"]
 
+    # 마찬가지로 None 값을 if else를 활용해 걸러줌
     salary = whatever.find("span", {"class": "salaryText"})
     if salary is not None:
         salary_anchor = salary.find("a")
