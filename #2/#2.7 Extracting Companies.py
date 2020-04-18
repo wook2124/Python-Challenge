@@ -33,6 +33,8 @@ def extract_indeed_jobs(last_page):
         company = str(company_anchor.string)
       else:
         company = str(company.string)
+      # strip은 끝에 있는 것을 없애줌
+      # 예를 들어 strip("F")라고 하면 F를 다 지워줌
       company = company.strip()
       print(title, company)
   return jobs

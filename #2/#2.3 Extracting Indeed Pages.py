@@ -12,6 +12,7 @@ spans = []
 for link in links:
   spans.append(link.find("span"))
 
+# 0부터 마지막 전(-2)까지 실행
 spans = spans[0:-1]
 
 print(spans)

@@ -26,6 +26,8 @@ def extract_indeed_jobs(last_page):
     soup = BeautifulSoup(result.text, "html.parser")
     results = soup.find_all("div", {"class": "jobsearch-SerpJobCard"})
     for result in results:
+      # <h2 class> 안에 있는 <title class>를 찾고
+      # <a href> 안에 있는 title을 찾음
       title = result.find("h2", {"class": "title"}).find("a")["title"]
       print(title)
   return jobs
