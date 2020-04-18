@@ -16,7 +16,6 @@ countries = []
 
 request = requests.get(URL)
 soup = BeautifulSoup(request.text, "html.parser")
-
 table = soup.find("table")
 rows = table.find_all("tr")[1:]
 
