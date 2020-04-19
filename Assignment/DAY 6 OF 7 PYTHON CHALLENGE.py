@@ -5,11 +5,6 @@ from babel.numbers import format_currency
 
 os.system("clear")
 
-"""
-Use the 'format_currency' function to format the output of the conversion
-format_currency(AMOUNT, CURRENCY_CODE, locale="ko_KR" (no need to change this one))
-"""
-
 URL = "https://www.iban.com/currency-codes"
 
 countries = []
@@ -68,3 +63,11 @@ for index, country in enumerate(countries):
 print("\nWhere are you from? Choose a country by number.\n")
 
 ask()
+
+
+"""
+Use the 'format_currency' function to format the output of the conversion
+format_currency(AMOUNT, CURRENCY_CODE, locale="ko_KR" (no need to change this one))
+"""
+
+print(format_currency(5000, "KRW", locale="ko_KR"))
