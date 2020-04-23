@@ -52,8 +52,9 @@ def get_jobs():
   jobs = extract_jobs([last_page])
   return jobs
 
-  # 정답 #
-  import os
+
+# 정답 #
+import os
 import csv
 import requests
 from bs4 import BeautifulSoup
