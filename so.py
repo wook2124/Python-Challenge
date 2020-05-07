@@ -13,4 +13,4 @@ def get_last_page():
 
 def get_jobs():
   last_page = get_last_page()
-  return []
+  return [] 
