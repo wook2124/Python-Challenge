@@ -16,7 +16,7 @@ def restart():
 
 def main():
   os.system("clear")
-  print("Welcome to IsItDown.py!\nPlease write a URL or URLs you want to check. (separated by comma)")
+  print("Welcome to IsItDown.py!\nPlease write a URL or URLs you want to check. (separated by `,` comma)")
   URLs = str(input()).lower().split(",")
   for URL in URLs:
     URL = URL.strip()
@@ -30,9 +30,9 @@ def main():
         if request.status_code == 200:
           print(URL, "is up!")
         else:
-          print(URL, "is down!")
+          print(URL, "is down..")
       except:
-        print(URL, "is down!")
+        print(URL, "is down..")
   restart()
 
 main()
