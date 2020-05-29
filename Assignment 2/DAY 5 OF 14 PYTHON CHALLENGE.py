@@ -5,8 +5,6 @@ from bs4 import BeautifulSoup
 os.system("clear")
 url = "https://www.iban.com/currency-codes"
 
-countries = []
-
 request = requests.get(url)
 soup = BeautifulSoup(request.text, "html.parser")
 
@@ -21,28 +19,39 @@ rows = table.find_all("tr")[1:]
 
 # print(rows)
 
+
+countries = []
+
 for row in rows:
     data = row.find_all("td")
     # name = Country name
     name = data[0].text
+    # code = Currency code
     code = data[2].text
     if name and code:
+        # No universal currency = Currency code is empty
         if name != "No universal currency":
             country = {'name': name.capitalize(), 'code': code}
             countries.append(country)
 
 
+print("Hello! Please choose select a country by number:")
+# enumerate = 열거하다 / 기본적으로 인덱스 값을 포함해서 출력함
+for index_value, country in enumerate(countries):
+    print(f"#{index_value} {country['name']}")
+
+
 def restart():
-  answer = str(input("Do you want to find more? y/n ")).lower()
-  if answer == "y" or answer == "n":
-    if answer == "y":
-      ask()
+    answer = str(input("Do you want to find more? y/n ")).lower()
+    if answer == "y" or answer == "n":
+        if answer == "y":
+            ask()
+        else:
+            print("OK. Bye!")
+            return
     else:
-      print("OK. Bye!")
-      return
-  else:
-    print("That's not a valid answer. Please answer `y` or `n`")
-    restart()
+        print("Please answer `y` or `n`")
+        restart()
 
 
 def ask():
@@ -62,10 +71,5 @@ def ask():
         print("That wasn't a number. Please wirte a number.")
         ask()
 
-
-print("Hello! Please choose select a country by number:")
-# enumerate = 열거하다 / 기본적으로 인덱스 값을 포함해서 출력함
-for index_value, country in enumerate(countries):
-    print(f"#{index_value} {country['name']}")
 
 ask()
