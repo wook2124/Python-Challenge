@@ -73,3 +73,6 @@ def ask():
 
 
 ask()
+
+
+# 힌트: https://stackoverflow.com/questions/522563/accessing-the-index-in-for-loops
