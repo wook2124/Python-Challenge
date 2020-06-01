@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 os.system("clear")
 
 def csv_company(company):
+  # "회사이름.csv"로 wirte으로 저장되게함
   file = open(f"{company['name']}.csv", mode="w")
   wirter = csv.writer(file)
   wirter.writerow(["local", "title", "time", "pay", "date"])
@@ -17,6 +18,7 @@ alba_url = "http://www.alba.co.kr"
 
 request = requests.get(alba_url)
 soup = BeautifulSoup(request.text, "html.parser")
+# 슈퍼브랜드 채용정보
 main = soup.find("div", {"id": "MainSuperBrand"})
 brands = main.find_all("li", {"class": "impact"})
 for brand in brands:
@@ -29,9 +31,11 @@ for brand in brands:
     company = {'name': name, 'jobs': []}
 
     # 브랜드 안 채용정보 가져오기
-    j_request = requests.get(link)
-    j_soup = BeautifulSoup(j_request.text, "html.parser")
-    info = j_soup.find("div", {"id": "NormalInfo"}).find("tbody")
+    b_request = requests.get(link)
+    b_soup = BeautifulSoup(b_request.text, "html.parser")
+    # 일반 채용정보
+    info = b_soup.find("div", {"id": "NormalInfo"}).find("tbody")
+    # tbody안에 있는 모든 table row를 일단 가지고옴
     t_rows = info.find_all("tr", {"class": ""})
     for row in t_rows:
       # 근무지(local)
