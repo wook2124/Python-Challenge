@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 
 os.system("clear")
 
+
 def csv_company(company):
   # "회사이름.csv"로 wirte으로 저장되게함
   file = open(f"{company['name']}.csv", mode="w")
