@@ -21,6 +21,7 @@ def make_detail_url(id):
 db = {}
 app = Flask("DayNine")
 
+
 @app.route("/")
 def home():
   # The template should reflect the current order_by selection.
@@ -36,11 +37,13 @@ def home():
   results = db[order_by]
   return render_template("index.html", order_by=order_by, results = results)
 
+
 # /<id>
 @app.route("/<id>")
 def detail(id):
   detail_request = requests.get(make_detail_url(id))
   result = detail_request.json()
   return render_template("detail.html", result = result)
+
 
 app.run(host="0.0.0.0")
