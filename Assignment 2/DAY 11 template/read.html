@@ -3,29 +3,23 @@
 
 <head>
 	<title>
-    Wook's News | {{result.title}}
+    Reddit Reader
   </title>
   <link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet"></link>
 </head>
 
 <body>
   <header>
-    <h1>{{result.title}}</h1>
-    <div>
-      {{result.points}} points | By {{result.author}} | <a href="{{result.url}}" target="_blank">{{result.url}}</a>
-    </div>
+    <h1><a href="/">Reddit Reader</a></h1>
+    <h3>Reading: {% for subreddit in selected%}r/{{subreddit}}  {% endfor %} </h3>
   </header>
   <main>
-    {% for comment in result.children %}
+    {% for post in posts %}
       <div>
-        {% if comment.author == None%}
-          [deleted]
-        {% else %}
-          <strong>{{comment.author}}:</strong>
-          <p>{{comment.text | safe}}</p>
-        {% endif %}
+          <h3><a href="https://reddit.com{{post.link}}" target="_blank">{{post.title}}</a></h3>
+          <h4>{{post.votes}} upvotes ·  r/{{post.subreddit}}</h4>
+        <hr />
       </div>
-      <hr />
     {% endfor %}
   </main>
 </body>

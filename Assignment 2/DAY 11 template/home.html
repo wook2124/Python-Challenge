@@ -3,49 +3,31 @@
 
 <head>
 	<title>
-    Wook's News |
-    {% if order_by == 'new' %}
-      New
-    {% elif order_by == 'popular'%}
-      Popular
-    {% endif %}
+    Reddit Reader
   </title>
   <link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet"></link>
 </head>
 
 <body>
   <header>
-    <h1>Wook's News</h1>
-    <div>
-      Order by:
-      {% if order_by == 'new' %}
-        <a href="/?order_by=popular">Popular</a>
-      {% else %}
-        <strong>Popular</strong>
-      {% endif %}
-      |
-      {% if order_by == 'popular' %}
-        <a href="/?order_by=new">New</a>
-      {% else %}
-        <strong>New</strong>
-      {% endif %}
-    </div>
+    <h1>Reddit Reader</h1>
+    <h3>A service to aggregate all your favourite subreddits</h3>
   </header>
   <main>
-    {% for result in results %}
-      <div>
-        <div>
-          <a href="/{{result.objectID}}">
-            <h3>{{result.title}}</h3>
-          </a>
-          (<a href="{{result.url}}" target="_blanl">{{result.url}}</a>)
-        </div>
-        <div>
-            {{result.points}} points | By: {{result.author}} | {{result.num_comments}} comments
-        </div>
-      </div>
-      <hr />
-    {% endfor %}
+    <form action="/read">
+      <h4>Select the subreddits you're interested on:</h4>
+      <ul>
+        {% for subreddit in subreddits %}
+          <li>
+            <input type="checkbox" name="{{subreddit}}" id="{{subreddit}}" />
+            <label for="{{subreddit}}">
+            r/{{subreddit}}
+            </label>
+          </li>
+        {% endfor %}
+      </ul>
+      <button type="submit">Aggregate</button>
+    </form>
   </main>
 </body>
 

@@ -1,5 +1,6 @@
 import requests
 from flask import Flask, render_template, request
+from scrapper import aggregate_subreddits
 
 """
 When you try to scrape reddit make sure to send the 'headers' on your request.
@@ -47,7 +48,7 @@ def read():
   for subreddit in subreddits:
     if subreddit in request.args:
       selected.append(subreddit)
-  posts = subreddits(selected)
+  posts = aggregate_subreddits(selected)
   posts.sort(key=lambda post: post['votes'], reverse=True)
   return render_template("read.html", selected=selected, posts=posts)
 
