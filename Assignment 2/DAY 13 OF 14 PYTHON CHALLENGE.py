@@ -1,7 +1,5 @@
-from flask import Flask, render_template, request, redirect
-from scrapper import aggregate_subreddits, check_subreddit
-from remote import remote_jobs
-from sof import get_jobs
+from flask import Flask, render_template, request, redirect, send_file
+from scrapper import get_jobs, save
 
 """
 These are the URLs that will give you remote jobs for the word 'python'
@@ -13,58 +11,50 @@ https://remoteok.io/remote-dev+python-jobs
 Good luck!
 """
 
-remote = remote_jobs()
-sof = get_jobs()
+app = Flask("Remote Scrapper")
 
-jobs = remote_jobs() + get_jobs()
+db = {}
 
-
-app = Flask("Remote World")
-
-subreddits = [
-    "javascript",
-    "reactjs",
-    "reactnative",
-    "programming",
-    "css",
-    "golang",
-    "flutter",
-    "rust",
-    "django"
-]
 
 @app.route("/")
 def home():
-  return render_template("home.html", subreddits=subreddits)
+    return render_template("index.html")
 
 
-@app.route("/read")
-def read():
-  selected = []
-  for subreddit in subreddits:
-    if subreddit in request.args:
-      selected.append(subreddit)
-  posts = aggregate_subreddits(selected)
-  posts.sort(key=lambda post: post['votes'], reverse=True)
-  return render_template("read.html", selected=selected, posts=posts)
+@app.route("/search")
+def search():
+    jobs = []
+    term = request.args.get("term").lower()
 
-
-@app.route("/add",methods=['POST'])
-def add():
-  to_add = request.form.get('new-subreddit',None)
-  if to_add:
-    if "/" not in to_add:
-      exists = check_subreddit(to_add)
-      if exists:
-        subreddits.append(to_add)
-        return redirect("/")
-      else:
-        error = "That page does not exist."
+    if db.get(term):
+        jobs.extend(db.get(term))
     else:
-      error = "Write the name without /r/"
-  else:
-    error = "Write a text."
-  return render_template("add-failed.html", error=error)
-    
+        jobs.extend(get_jobs(term))
+
+        if len(jobs) == 0:
+            return render_template("error.html", error_word=term, error_code=0)
+        db[term] = jobs
+
+    quantities = len(jobs)
+    keyword = term.capitalize()
+    return render_template("result.html", jobs=jobs, quantities=quantities, keyword=keyword)
+
+
+@app.route("/download")
+def download():
+    keyword = request.args.get("keyword")
+
+    if keyword is None:
+        return render_template("error.html", error_word="", error_code=1)
+    elif db.get(keyword.lower()) is None:
+        return render_template("error.html", error_word="", error_code=1)
+
+    keyword = keyword.lower()
+    lists = db.get(keyword)
+    save(lists)
+
+    return send_file("jobs.csv", as_attachment=True, attachment_filename=f"{keyword}.csv")
+
+
 
 app.run(host="0.0.0.0")
